@@ -17,7 +17,7 @@ public class FastCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        LineSegment[] segments = new LineSegment[N * N];
+        LineSegment[] rawSegments = new LineSegment[N * N];
         int segmentsCounter = 0;
 
         Arrays.sort(points);
@@ -70,11 +70,14 @@ public class FastCollinearPoints {
 
                 if (collinearsCount >= 4 && biggest.compareTo(startPoint) != 0) {
                     LineSegment segment = new LineSegment(startPoint, biggest);
-                    segments[segmentsCounter] = segment;
+                    rawSegments[segmentsCounter] = segment;
                     segmentsCounter++;
                 }
             }
         }
+
+        LineSegment[] segments = new LineSegment[segmentsCounter];
+        System.arraycopy(rawSegments, 0, segments, 0, segmentsCounter);
 
         return segments;
     }

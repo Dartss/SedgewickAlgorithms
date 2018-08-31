@@ -35,8 +35,7 @@ public class Point implements Comparable<Point> {
      */
     public void draw() {
         /* DO NOT MODIFY */
-//        StdDraw.point(x, y);
-        StdDraw.filledCircle(x, y, 100);
+        StdDraw.point(x, y);
     }
 
     /**
@@ -156,15 +155,10 @@ public class Point implements Comparable<Point> {
         LineSegment[] segments = collinear.segments();
         System.out.println("Time took | " + watch.elapsedTime());
 
-        LineSegment segment = segments[0];
-
-        int segmentsCounter = 0;
-        for (int i = 0; i < segments.length && segment != null; i++, segment = segments[i]) {
+        for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
-            segmentsCounter++;
         }
-        System.out.println("Segments found : " + segmentsCounter);
         StdDraw.show();
     }
 }
