@@ -13,8 +13,6 @@ import java.util.Comparator;
 
 import edu.princeton.cs.algs4.*;
 
-import javax.sound.sampled.Line;
-
 public class Point implements Comparable<Point> {
 
     private final int x;     // x-coordinate of this point
@@ -122,7 +120,8 @@ public class Point implements Comparable<Point> {
         public int compare(Point p1, Point p2) {
             double slp1 = Point.this.slopeTo(p1);
             double slp2 = Point.this.slopeTo(p2);
-            return (int) (slp1 - slp2);
+            double diff = slp1 - slp2;
+            return Double.compare(diff, 0.0);
         }
     }
 
@@ -149,25 +148,22 @@ public class Point implements Comparable<Point> {
         }
         StdDraw.show();
 
-        SmartCollinearPoints p = new SmartCollinearPoints(points);
-        p.segments();
+//         print and draw the line segments
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
 
-        // print and draw the line segments
-//        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
-//
-//        Stopwatch watch = new Stopwatch();
-//        LineSegment[] segments = collinear.segments();
-//        System.out.println("Time took | " + watch.elapsedTime());
-//
-//        LineSegment segment = segments[0];
-//
-//        int segmentsCounter = 0;
-//        for (int i = 1; i < segments.length && segment != null; i++, segment = segments[i]) {
-//            StdOut.println(segment);
-//            segment.draw();
-//            segmentsCounter++;
-//        }
-//        System.out.println("Segments found : " + segmentsCounter);
-//        StdDraw.show();
+        Stopwatch watch = new Stopwatch();
+        LineSegment[] segments = collinear.segments();
+        System.out.println("Time took | " + watch.elapsedTime());
+
+        LineSegment segment = segments[0];
+
+        int segmentsCounter = 0;
+        for (int i = 0; i < segments.length && segment != null; i++, segment = segments[i]) {
+            StdOut.println(segment);
+            segment.draw();
+            segmentsCounter++;
+        }
+        System.out.println("Segments found : " + segmentsCounter);
+        StdDraw.show();
     }
 }
