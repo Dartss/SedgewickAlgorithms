@@ -7,12 +7,10 @@ public class FastCollinearPoints {
     private Point[] points;
     private Point[] sorted;
     private Comparator<Point> comparator;
-    private LineSegment[] segments;
     private final int N;
 
     public FastCollinearPoints(Point[] points) {
         N = points.length;
-        this.segments = new LineSegment[N * N];
         this.points = points;
         this.sorted = new Point[N];
         System.arraycopy(points, 0, sorted, 0, N);
@@ -29,16 +27,16 @@ public class FastCollinearPoints {
 
             Arrays.sort(sorted);
             sort(sorted, new Point[N], 0, N);
-//            printSlopes(N, startPoint);
 
             Point prevPoint;
             Point currentPoint;
-            Point biggest = startPoint;
+            Point biggest;
             double prevSlop;
             double currentSlop;
 
             for (int i = 1; i < N; i++) {
-                int collinearsCount = 1;
+                int collinearsCount = 0;
+                biggest = startPoint;
                 prevPoint = sorted[i - 1];
                 currentPoint = sorted[i];
                 prevSlop = startPoint.slopeTo(prevPoint);
@@ -53,7 +51,11 @@ public class FastCollinearPoints {
 
                     if (currentPoint.compareTo(biggest) > 0) biggest = currentPoint;
 
-                    collinearsCount++;
+                    if (collinearsCount == 0) {
+                        collinearsCount += 3;
+                    } else {
+                        collinearsCount += 1;
+                    }
 
                     i++;
                     if (i < N) {
@@ -75,16 +77,6 @@ public class FastCollinearPoints {
         }
 
         return segments;
-    }
-
-    private void printSlopes(int n, Point startPoint) {
-        double[] slopes = new double[n];
-        for (int i = 0; i < n; i++) {
-            double slp = startPoint.slopeTo(sorted[i]);
-            slopes[i] = slp;
-            System.out.println("Slope of " + sorted[i] + " to " + startPoint + " is " + slp);
-        }
-        System.out.println();
     }
 
     private void merge(Point[] a, Point[] aux, int lo, int mid, int hi) {

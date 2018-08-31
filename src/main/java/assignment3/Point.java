@@ -150,6 +150,7 @@ public class Point implements Comparable<Point> {
 
 //         print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
+//        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
 
         Stopwatch watch = new Stopwatch();
         LineSegment[] segments = collinear.segments();
