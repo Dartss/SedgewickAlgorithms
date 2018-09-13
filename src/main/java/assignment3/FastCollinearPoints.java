@@ -35,7 +35,7 @@ public class FastCollinearPoints {
             double currentSlop;
 
             for (int i = 1; i < N; i++) {
-                int collinearsCount = 0;
+                int collinearsCount = 2;
                 biggest = startPoint;
                 prevPoint = sorted[i - 1];
                 currentPoint = sorted[i];
@@ -51,11 +51,7 @@ public class FastCollinearPoints {
 
                     if (currentPoint.compareTo(biggest) > 0) biggest = currentPoint;
 
-                    if (collinearsCount == 0) {
-                        collinearsCount += 3;
-                    } else {
-                        collinearsCount += 1;
-                    }
+                    collinearsCount++;
 
                     i++;
                     if (i < N) {
@@ -96,11 +92,6 @@ public class FastCollinearPoints {
             a[k] = aux[k];
     }
 
-
-    /***************************************************************************
-     *  Mergesort the subarray a[lo] .. a[hi-1], using the
-     *  auxilliary array aux[] as scratch space.
-     ***************************************************************************/
     private void sort(Point[] a, Point[] aux, int lo, int hi) {
 
         // base case

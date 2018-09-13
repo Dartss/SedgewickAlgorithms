@@ -1,7 +1,6 @@
-package assignment3;
-/******************************************************************************
- *  Compilation:  javac Point.java
- *  Execution:    java Point
+package assignment3; /******************************************************************************
+ *  Compilation:  javac assignment3.Point.java
+ *  Execution:    java assignment3.Point
  *  Dependencies: none
  *
  *  An immutable data type for points in the plane.
@@ -125,7 +124,7 @@ public class Point implements Comparable<Point> {
     }
 
     /**
-     * Unit tests the Point data type.
+     * Unit tests the assignment3.Point data type.
      */
     public static void main(String[] args) {
         // read the n points from a file
@@ -149,7 +148,7 @@ public class Point implements Comparable<Point> {
 
 //         print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
-//        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+//        assignment3.BruteCollinearPoints collinear = new assignment3.BruteCollinearPoints(points);
 
         Stopwatch watch = new Stopwatch();
         LineSegment[] segments = collinear.segments();
